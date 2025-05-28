@@ -21,7 +21,7 @@ logging.basicConfig(
 )
 
 # Configuration
-BASE_URL = "https://traders.gaia.domains/v1/chat/completions"
+BASE_URL = "https://traders.gaia.domains"  # ✅ Correct base URL
 MODEL = "qwen2-0.5b-instruct"
 MAX_RETRIES = 100  # Essentially infinite retries
 RETRY_DELAY = 5  # Seconds between retries
@@ -131,6 +131,7 @@ QUESTIONS = [
     "What is the role of sentiment indexes like Fear & Greed in trade timing?",
     "What are the long-term effects of front-running on decentralized exchanges?"
 ]
+
 def chat_with_ai(api_key: str, question: str) -> str:
     headers = {
         "Content-Type": "application/json",
@@ -189,8 +190,7 @@ def run_bot(api_key: str):
                 logging.info(f"Received full response in {elapsed:.2f}s")
                 logging.info(f"Response length: {len(response)} characters")
 
-                # Ensure the script waits for the full response before proceeding
-                time.sleep(QUESTION_DELAY)  # Wait before asking next question
+                time.sleep(QUESTION_DELAY)
 
             except Exception as e:
                 logging.error(f"Failed to process question: {str(e)}")
@@ -205,7 +205,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
